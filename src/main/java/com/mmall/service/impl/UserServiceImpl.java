@@ -82,14 +82,14 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createBySuccessMessage("校驗成功");
     }
 
-    public ServerResponse<String> selectQuestion(String username){
+    public ServerResponse selectQuestion(String username){
         ServerResponse validResponse = this.checkValid(username,Const.USERNAME);
         if (validResponse.isSuccess()) {
             return ServerResponse.createByErrorMessage("用戶不存在");
         }
         String question = userMapper.selectQuestionByUsername(username);
         if (org.apache.commons.lang3.StringUtils.isNotBlank(question)) {
-            return ServerResponse.createBySuccessMessage(question);
+            return ServerResponse.createBySuccess(question);
         }
         return ServerResponse.createByErrorMessage("找回密碼的問題是空的");
     }
